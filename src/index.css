@@ -134,3 +134,203 @@ body {
   50% { transform: scale(1.2); opacity: 0.5; }
   100% { transform: scale(0); opacity: 0; }
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Ensure minimum touch target size of 44x44px */
+  button, 
+  .cursor-pointer,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Larger text for readability */
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Better spacing for mobile */
+  .space-y-4 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 2rem;
+  }
+
+  /* Larger interactive elements */
+  input[type="text"],
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 14px;
+    min-height: 48px;
+  }
+
+  /* Better grid spacing on mobile */
+  .grid {
+    gap: 1rem;
+  }
+
+  /* Ensure cards are readable */
+  .rounded-3xl,
+  .rounded-2xl {
+    padding: 1.25rem;
+  }
+
+  /* Larger emoji for better visibility */
+  .text-6xl {
+    font-size: 4rem;
+  }
+
+  .text-7xl {
+    font-size: 5rem;
+  }
+
+  /* Better modal/popup sizing */
+  .fixed.bottom-10.right-10 {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Better font sizes for headings */
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Improve chalkboard readability */
+  .chalkboard-text {
+    font-size: 1rem;
+    white-space: normal;
+    animation: none;
+    border-right: none;
+  }
+
+  /* Better button text */
+  button {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Improve timer display */
+  .text-4xl.font-mono {
+    font-size: 2.5rem;
+  }
+
+  /* Better spacing for decorative elements */
+  .fixed.left-0,
+  .fixed.right-10 {
+    display: none; /* Hide decorative elements on mobile for cleaner UI */
+  }
+
+  /* Show cat corner on mobile */
+  .fixed.bottom-4.right-4 {
+    display: block;
+  }
+
+  /* Better card layouts */
+  .md\\:col-span-2 {
+    grid-column: span 1;
+  }
+
+  /* Improve affirmation jar popup */
+  .affirmation-paper {
+    width: calc(100vw - 4rem) !important;
+    max-width: 300px;
+    font-size: 1rem;
+  }
+
+  /* Better countdown text */
+  .text-2xl.font-mono {
+    font-size: 1.25rem;
+  }
+
+  /* Improve bubble grid */
+  .grid-cols-2 {
+    gap: 0.75rem;
+  }
+
+  .grid-cols-2 button {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+  .text-4xl {
+    font-size: 2rem;
+  }
+
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+
+  .text-6xl {
+    font-size: 3rem;
+  }
+
+  .p-6 {
+    padding: 1rem;
+  }
+
+  .p-8 {
+    padding: 1.25rem;
+  }
+
+  button {
+    font-size: 13px;
+  }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .min-h-screen {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+
+  .text-6xl,
+  .text-7xl {
+    font-size: 3rem;
+  }
+}
+
+/* Improve touch interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover\\:scale-105:hover,
+  .hover\\:scale-110:hover,
+  .hover\\:scale-125:hover {
+    transform: none;
+  }
+
+  /* Add active states instead */
+  button:active,
+  .cursor-pointer:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  /* Better tap feedback */
+  * {
+    -webkit-tap-highlight-color: rgba(255, 179, 142, 0.3);
+  }
+}

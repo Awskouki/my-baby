@@ -6,6 +6,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
+import { loadProgress, saveProgress, addAchievement } from './storage';
 import { 
   Book, 
   Coffee, 
@@ -1059,14 +1060,29 @@ const WallOfPride = ({ items }: { items: string[] }) => (
 const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
   const [timer, setTimer] = useState(60);
   const [prideItems, setPrideItems] = useState<string[]>([]);
-  const [plantGrowth, setPlantGrowth] = useState(0);
   
-  // New State for Achievements & Hydration
-  const [petCount, setPetCount] = useState(0);
-  const [poppedTotal, setPoppedTotal] = useState(0);
-  const [achievements, setAchievements] = useState<string[]>([]);
+  // Load saved progress on mount
+  const [progress, setProgress] = useState(() => loadProgress());
+  const [plantGrowth, setPlantGrowth] = useState(progress.plantGrowth);
+  const [petCount, setPetCount] = useState(progress.petCount);
+  const [poppedTotal, setPoppedTotal] = useState(progress.bubblesPoppedTotal);
+  const [achievements, setAchievements] = useState<string[]>(progress.achievements);
   const [showHydration, setShowHydration] = useState(false);
   const [isTimerActive, setIsTimerActive] = useState(false);
+
+  // Save progress whenever it changes
+  useEffect(() => {
+    const updatedProgress = {
+      achievements,
+      plantGrowth,
+      petCount,
+      bubblesPoppedTotal: poppedTotal,
+      focusSessionsCompleted: progress.focusSessionsCompleted,
+      lastVisit: new Date().toISOString(),
+    };
+    saveProgress(updatedProgress);
+    setProgress(updatedProgress);
+  }, [achievements, plantGrowth, petCount, poppedTotal]);
 
   useEffect(() => {
     if (timer > 0) {
@@ -1084,8 +1100,9 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
   }, []);
 
   const unlockAchievement = (id: string) => {
-    if (!achievements.includes(id)) {
-      setAchievements(prev => [...prev, id]);
+    const newAchievements = addAchievement(achievements, id);
+    if (newAchievements.length > achievements.length) {
+      setAchievements(newAchievements);
       confetti({ particleCount: 50, spread: 60, colors: ['#ffb38e', '#ffd1dc'] });
     }
   };
@@ -1125,7 +1142,13 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
         <CatModoro 
           isActive={isTimerActive}
           setIsActive={setIsTimerActive}
-          onComplete={() => unlockAchievement('scholar')} 
+          onComplete={() => {
+            unlockAchievement('scholar');
+            setProgress(prev => ({
+              ...prev,
+              focusSessionsCompleted: prev.focusSessionsCompleted + 1
+            }));
+          }} 
         />
         <CatFiRadio />
         <MeowstonesModule achievements={achievements} />
