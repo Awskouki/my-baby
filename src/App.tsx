@@ -1010,6 +1010,7 @@ const ProudModule = ({ onAdd }: { onAdd: (item: string) => void }) => {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
               className="flex-1 bg-white/50 border-2 border-white rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#ffb38e]"
             />
             <button
@@ -1027,6 +1028,146 @@ const ProudModule = ({ onAdd }: { onAdd: (item: string) => void }) => {
           </div>
           <p className="font-rounded font-bold text-[#ffb38e] text-sm">See? You're doing great, Molka. 🐾</p>
           <button onClick={() => { setShow(false); setText(""); }} className="text-[10px] text-gray-400 underline">Write another</button>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
+// Cat-Themed To-Do List
+interface TodoItem {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+const CatToDoList = () => {
+  const [todos, setTodos] = useState<TodoItem[]>(() => {
+    const saved = localStorage.getItem('molka_todos');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [newTask, setNewTask] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem('molka_todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const addTask = () => {
+    if (newTask.trim()) {
+      setTodos([...todos, { id: Date.now(), text: newTask, completed: false }]);
+      setNewTask("");
+      playMeow();
+    }
+  };
+
+  const toggleTask = (id: number) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+    playPurr();
+  };
+
+  const deleteTask = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const completedCount = todos.filter(t => t.completed).length;
+
+  return (
+    <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="font-rounded font-bold text-gray-700 flex items-center gap-2">
+          📝 Molka's To-Do List
+        </h3>
+        <span className="text-xs font-mono bg-white/50 px-2 py-1 rounded-full">
+          {completedCount}/{todos.length} done
+        </span>
+      </div>
+
+      {/* Add Task Input */}
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && addTask()}
+          placeholder="Add a task... 🐾"
+          className="flex-1 bg-white/50 border-2 border-white rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#ffb38e] placeholder:text-gray-400"
+        />
+        <button
+          onClick={addTask}
+          className="neon-button text-white p-2 rounded-xl hover:scale-105 transition-transform"
+        >
+          <Send className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Task List */}
+      <div className="space-y-2 max-h-64 overflow-y-auto">
+        <AnimatePresence>
+          {todos.length === 0 ? (
+            <div className="text-center py-8 text-gray-400 text-sm font-rounded">
+              <div className="text-4xl mb-2">😴</div>
+              No tasks yet. Add one to get started!
+            </div>
+          ) : (
+            todos.map(todo => (
+              <motion.div
+                key={todo.id}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 20, opacity: 0 }}
+                className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+                  todo.completed 
+                    ? 'bg-green-50/50 border border-green-200' 
+                    : 'bg-white/50 border border-white'
+                }`}
+              >
+                {/* Custom Paw Checkbox */}
+                <button
+                  onClick={() => toggleTask(todo.id)}
+                  className="flex-shrink-0 w-6 h-6 rounded-full border-2 border-[#ffb38e] flex items-center justify-center transition-all hover:scale-110"
+                  style={{
+                    background: todo.completed ? '#ffb38e' : 'transparent'
+                  }}
+                >
+                  {todo.completed && <span className="text-white text-sm">🐾</span>}
+                </button>
+
+                {/* Task Text */}
+                <span 
+                  className={`flex-1 text-sm font-rounded ${
+                    todo.completed 
+                      ? 'line-through text-gray-400' 
+                      : 'text-gray-700'
+                  }`}
+                >
+                  {todo.text}
+                </span>
+
+                {/* Delete Button */}
+                <button
+                  onClick={() => deleteTask(todo.id)}
+                  className="flex-shrink-0 text-gray-400 hover:text-red-400 transition-colors"
+                >
+                  <span className="text-lg">×</span>
+                </button>
+              </motion.div>
+            ))
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Encouragement */}
+      {completedCount > 0 && (
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="text-center text-xs font-rounded text-[#ffb38e] font-bold"
+        >
+          {completedCount === todos.length 
+            ? "All done! You're amazing, Molka! 🎉🐱" 
+            : `Keep going! You've got this! 💪🐱`}
         </motion.div>
       )}
     </div>
@@ -1174,6 +1315,7 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
         <SnackGeneratorModule />
         <DeskPlantModule growth={plantGrowth} />
         <FreedomCountdownModule />
+        <CatToDoList />
         <AffirmationJarModule />
         <BubblePopModule onPop={() => {
           handleAction();
