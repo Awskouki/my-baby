@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -6,8 +6,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
-import { loadProgress, saveProgress, addAchievement } from './storage';
-import { FloatingParticles, PawCursorTrail, ToastContainer, ClickSparkles, showToast } from './effects';
 import { 
   Book, 
   Coffee, 
@@ -197,7 +195,7 @@ const HydrationHero = ({ show, onClose }: { show: boolean; onClose: () => void }
         exit={{ x: 300, opacity: 0 }}
         className="fixed bottom-10 right-10 z-[100] bg-white/90 backdrop-blur-md p-6 rounded-3xl border-2 border-blue-200 shadow-2xl flex items-center gap-4"
       >
-        <div className="text-4xl">🐱💧</div>
+        <div className="text-4xl">ðŸ±ðŸ’§</div>
         <div>
           <p className="font-rounded font-bold text-gray-700">Paw-se for a sip, Molka?</p>
           <p className="text-xs text-gray-500">Locking in is thirsty work! Stay hydrated.</p>
@@ -215,10 +213,10 @@ const HydrationHero = ({ show, onClose }: { show: boolean; onClose: () => void }
 
 const MeowstonesModule = ({ achievements }: { achievements: string[] }) => {
   const stickers = [
-    { id: 'zen', label: 'Zen Master', icon: '🧘🐱', desc: 'Breathed with the cat' },
-    { id: 'buster', label: 'Stress Buster', icon: '💥🐱', desc: 'Popped 10 stress bubbles' },
-    { id: 'lover', label: 'Cat Lover', icon: '💖🐱', desc: 'Petted the cat 5 times' },
-    { id: 'scholar', label: 'Scholar', icon: '🎓🐱', desc: 'Completed a focus session' },
+    { id: 'zen', label: 'Zen Master', icon: 'ðŸ§˜ðŸ±', desc: 'Breathed with the cat' },
+    { id: 'buster', label: 'Stress Buster', icon: 'ðŸ’¥ðŸ±', desc: 'Popped 10 stress bubbles' },
+    { id: 'lover', label: 'Cat Lover', icon: 'ðŸ’–ðŸ±', desc: 'Petted the cat 5 times' },
+    { id: 'scholar', label: 'Scholar', icon: 'ðŸŽ“ðŸ±', desc: 'Completed a focus session' },
   ];
 
   return (
@@ -285,7 +283,7 @@ const PetTheCat = ({ onPet }: { onPet: () => void }) => {
           animate={isPetting ? { scale: [1, 1.05, 1], rotate: [-2, 2, -2] } : {}}
           className="text-7xl select-none"
         >
-          {isPetting ? "😸" : "🐱"}
+          {isPetting ? "ðŸ˜¸" : "ðŸ±"}
         </motion.div>
       </div>
       <p className="text-xs font-rounded text-gray-400">Click or tap to pet Molka's digital companion</p>
@@ -352,7 +350,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
                 transition={{ duration: 2, repeat: Infinity }}
                 className="text-6xl relative z-10"
               >
-                🐱
+                ðŸ±
                 {/* Tiny Glasses */}
                 {isActive && (
                   <motion.div 
@@ -360,7 +358,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
                     animate={{ opacity: 1, scale: 1 }}
                     className="absolute top-[18px] left-1/2 -translate-x-1/2 text-xl pointer-events-none"
                   >
-                    👓
+                    ðŸ‘“
                   </motion.div>
                 )}
               </motion.div>
@@ -371,7 +369,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
                 transition={{ duration: 3, repeat: Infinity }}
                 className="absolute -bottom-1 text-4xl z-20"
               >
-                📖
+                ðŸ“–
               </motion.div>
 
               {/* Floating Pencil when active */}
@@ -385,7 +383,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="absolute right-0 text-xl z-30"
                 >
-                  ✏️
+                  âœï¸
                 </motion.div>
               )}
 
@@ -400,7 +398,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
                   transition={{ duration: 4, repeat: Infinity, delay: 2 }}
                   className="absolute -top-6 -right-4 text-2xl"
                 >
-                  💡
+                  ðŸ’¡
                 </motion.div>
               )}
             </motion.div>
@@ -417,7 +415,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
                 transition={{ duration: 3, repeat: Infinity }}
                 className="text-6xl"
               >
-                😴🐱
+                ðŸ˜´ðŸ±
               </motion.div>
               {/* Floating Zzz */}
               {[1, 2, 3].map(i => (
@@ -483,7 +481,7 @@ const CatFiRadio = () => {
           transition={{ duration: 2, repeat: Infinity }}
           className="relative text-6xl"
         >
-          ✍️🐱
+          âœï¸ðŸ±
         </motion.div>
         <div className="absolute bottom-2 right-2 flex gap-1">
           {[1, 2, 3].map(i => (
@@ -510,12 +508,12 @@ const CatFiRadio = () => {
 const SnackGeneratorModule = () => {
   const [snack, setSnack] = useState<{ name: string; icon: string } | null>(null);
   const snacks = [
-    { name: "Apple slices with almond butter", icon: "🍎" },
-    { name: "A cozy Matcha Latte", icon: "🍵" },
-    { name: "Dark chocolate & walnuts", icon: "🍫" },
-    { name: "Greek yogurt with honey", icon: "🥣" },
-    { name: "Blueberries (Brain berries!)", icon: "🫐" },
-    { name: "Hummus & carrot sticks", icon: "🥕" },
+    { name: "Apple slices with almond butter", icon: "ðŸŽ" },
+    { name: "A cozy Matcha Latte", icon: "ðŸµ" },
+    { name: "Dark chocolate & walnuts", icon: "ðŸ«" },
+    { name: "Greek yogurt with honey", icon: "ðŸ¥£" },
+    { name: "Blueberries (Brain berries!)", icon: "ðŸ«" },
+    { name: "Hummus & carrot sticks", icon: "ðŸ¥•" },
   ];
 
   const generate = () => {
@@ -553,7 +551,7 @@ const SnackGeneratorModule = () => {
 };
 
 const DeskPlantModule = ({ growth }: { growth: number }) => {
-  const stages = ["🌱", "🌿", "🪴", "🌵", "🌸"];
+  const stages = ["ðŸŒ±", "ðŸŒ¿", "ðŸª´", "ðŸŒµ", "ðŸŒ¸"];
   const stage = stages[Math.min(Math.floor(growth / 2), stages.length - 1)];
 
   return (
@@ -644,7 +642,7 @@ const AffirmationJarModule = () => {
           onClick={pickOne}
           className="text-7xl cursor-pointer select-none"
         >
-          🫙
+          ðŸ«™
         </motion.div>
         <AnimatePresence>
           {affirmation && (
@@ -655,7 +653,7 @@ const AffirmationJarModule = () => {
               className="absolute affirmation-paper p-4 w-48 z-20"
             >
               <p className="font-hand text-sm text-gray-700 leading-tight">"{affirmation}"</p>
-              <button onClick={() => setAffirmation("")} className="absolute -top-2 -right-2 bg-red-400 text-white rounded-full w-5 h-5 text-[10px]">×</button>
+              <button onClick={() => setAffirmation("")} className="absolute -top-2 -right-2 bg-red-400 text-white rounded-full w-5 h-5 text-[10px]">Ã—</button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -670,7 +668,7 @@ const Chalkboard = () => (
     <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle,white_1px,transparent_1px)] bg-[size:20px_20px]" />
     <div className="relative font-mono text-white text-lg md:text-xl leading-relaxed">
       <p className="chalkboard-text inline-block">
-        Problem: Find a partner who’s smart, kind, and loves cats.
+        Problem: Find a partner whoâ€™s smart, kind, and loves cats.
       </p>
       <div className="mt-2 text-[#a8d8ea] font-hand text-2xl">
         Solution: ...
@@ -768,7 +766,7 @@ const CatCorner = () => {
             exit={{ opacity: 0 }}
             className="absolute -top-12 left-0 bg-white px-3 py-1 rounded-full border border-gray-200 shadow-sm text-sm font-hand font-bold"
           >
-            Meow! 🐾
+            Meow! ðŸ¾
           </motion.div>
         )}
       </AnimatePresence>
@@ -776,7 +774,7 @@ const CatCorner = () => {
         animate={isAwake ? { rotate: [0, -5, 5, 0], scale: 1.1 } : {}}
         className="text-4xl"
       >
-        {isAwake ? "🐱" : "🐈‍⬛"}
+        {isAwake ? "ðŸ±" : "ðŸˆâ€â¬›"}
       </motion.div>
     </div>
   );
@@ -807,7 +805,7 @@ const WalkingCat = () => {
           className="paw-print absolute text-xs opacity-40"
           style={{ left: paw.x, top: paw.y }}
         >
-          🐾
+          ðŸ¾
         </div>
       ))}
     </div>
@@ -983,7 +981,7 @@ const SoundModule = () => {
           </button>
         ))}
       </div>
-      <p className="text-[10px] font-rounded text-gray-400 text-center">No pressure — just here if you need background calm, Molka.</p>
+      <p className="text-[10px] font-rounded text-gray-400 text-center">No pressure â€” just here if you need background calm, Molka.</p>
     </div>
   );
 };
@@ -1025,7 +1023,7 @@ const ProudModule = ({ onAdd }: { onAdd: (item: string) => void }) => {
           <div className="bg-white p-4 rounded-2xl shadow-sm inline-block">
             <p className="font-hand text-xl text-gray-700">"{text}"</p>
           </div>
-          <p className="font-rounded font-bold text-[#ffb38e] text-sm">See? You're doing great, Molka. 🐾</p>
+          <p className="font-rounded font-bold text-[#ffb38e] text-sm">See? You're doing great, Molka. ðŸ¾</p>
           <button onClick={() => { setShow(false); setText(""); }} className="text-[10px] text-gray-400 underline">Write another</button>
         </motion.div>
       )}
@@ -1061,33 +1059,14 @@ const WallOfPride = ({ items }: { items: string[] }) => (
 const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
   const [timer, setTimer] = useState(60);
   const [prideItems, setPrideItems] = useState<string[]>([]);
+  const [plantGrowth, setPlantGrowth] = useState(0);
   
-  // Load saved progress on mount
-  const [plantGrowth, setPlantGrowth] = useState(() => {
-    const saved = loadProgress();
-    console.log('Loaded progress on mount:', saved);
-    return saved.plantGrowth;
-  });
-  const [petCount, setPetCount] = useState(() => loadProgress().petCount);
-  const [poppedTotal, setPoppedTotal] = useState(() => loadProgress().bubblesPoppedTotal);
-  const [achievements, setAchievements] = useState<string[]>(() => loadProgress().achievements);
-  const [focusSessions, setFocusSessions] = useState(() => loadProgress().focusSessionsCompleted);
+  // New State for Achievements & Hydration
+  const [petCount, setPetCount] = useState(0);
+  const [poppedTotal, setPoppedTotal] = useState(0);
+  const [achievements, setAchievements] = useState<string[]>([]);
   const [showHydration, setShowHydration] = useState(false);
   const [isTimerActive, setIsTimerActive] = useState(false);
-
-  // Save progress whenever it changes
-  useEffect(() => {
-    const updatedProgress = {
-      achievements,
-      plantGrowth,
-      petCount,
-      bubblesPoppedTotal: poppedTotal,
-      focusSessionsCompleted: focusSessions,
-      lastVisit: new Date().toISOString(),
-    };
-    console.log('Saving progress:', updatedProgress);
-    saveProgress(updatedProgress);
-  }, [achievements, plantGrowth, petCount, poppedTotal, focusSessions]);
 
   useEffect(() => {
     if (timer > 0) {
@@ -1105,23 +1084,9 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
   }, []);
 
   const unlockAchievement = (id: string) => {
-    const newAchievements = addAchievement(achievements, id);
-    if (newAchievements.length > achievements.length) {
-      setAchievements(newAchievements);
+    if (!achievements.includes(id)) {
+      setAchievements(prev => [...prev, id]);
       confetti({ particleCount: 50, spread: 60, colors: ['#ffb38e', '#ffd1dc'] });
-      
-      // Show toast notification
-      const achievementNames: Record<string, { title: string; message: string }> = {
-        zen: { title: 'Zen Master Unlocked! 🧘🐱', message: 'You took a moment to breathe. Proud of you!' },
-        buster: { title: 'Stress Buster Unlocked! 💥🐱', message: 'You popped 10 stress bubbles. Keep going!' },
-        lover: { title: 'Cat Lover Unlocked! 💖🐱', message: 'You petted the cat 5 times. So sweet!' },
-        scholar: { title: 'Scholar Unlocked! 🎓🐱', message: 'You completed a focus session. Amazing work!' },
-      };
-      
-      const achievement = achievementNames[id];
-      if (achievement) {
-        showToast('🏆', achievement.title, achievement.message);
-      }
     }
   };
 
@@ -1131,22 +1096,18 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
 
   return (
     <div className="min-h-screen bg-study-break p-6 md:p-12 font-rounded overflow-x-hidden">
-      <FloatingParticles />
-      <PawCursorTrail />
-      <ClickSparkles />
-      <ToastContainer />
       <Doodles opacity={0.4} />
       <HydrationHero show={showHydration} onClose={() => setShowHydration(false)} />
       <CatCorner />
       <WalkingCat />
       
       <header className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
-        <h1 className="text-4xl md:text-5xl font-bold gradient-text flex items-center justify-center gap-2">
-          My Princess Molka <Sparkles className="w-8 h-8 text-yellow-400" />
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 flex items-center justify-center gap-2">
+          Molka <Sparkles className="w-8 h-8 text-yellow-400" />
         </h1>
         <div className="bg-white/30 backdrop-blur-md p-6 rounded-3xl border border-white/40 shadow-sm inline-block">
           <p className="chalkboard-text text-lg md:text-xl text-gray-700 font-medium">
-            Hey Molka. Exams are tough. You're tougher. Take 60 seconds for yourself. 💜
+            Hey Molka. Exams are tough. You're tougher. Take 60 seconds for yourself. ðŸ’œ
           </p>
           <div className="mt-4 flex items-center justify-center gap-2 text-gray-500 font-mono text-sm">
             <Volume2 className="w-4 h-4" /> {timer}s left of calm
@@ -1164,10 +1125,7 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
         <CatModoro 
           isActive={isTimerActive}
           setIsActive={setIsTimerActive}
-          onComplete={() => {
-            unlockAchievement('scholar');
-            setFocusSessions(prev => prev + 1);
-          }} 
+          onComplete={() => unlockAchievement('scholar')} 
         />
         <CatFiRadio />
         <MeowstonesModule achievements={achievements} />
@@ -1190,7 +1148,7 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
         
         <div className="md:col-span-2 bg-white/40 p-8 rounded-3xl border border-white/20 shadow-sm text-center space-y-6">
           <p className="text-gray-600 font-medium">
-            Feeling a little lighter? Good. One more sweet thing coming your way soon… but only when exams are done. 💌
+            Feeling a little lighter? Good. One more sweet thing coming your way soonâ€¦ but only when exams are done. ðŸ’Œ
           </p>
           <div className="flex flex-col items-center gap-4">
             <motion.div
@@ -1198,14 +1156,14 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
               transition={{ duration: 2, repeat: Infinity }}
               className="text-5xl"
             >
-              😴
+              ðŸ˜´
             </motion.div>
             <p className="text-xs text-gray-400 italic">I'll be right here, Molka.</p>
             <button
               onClick={onFinish}
-              className="mt-4 neon-button px-8 py-4 rounded-full font-bold text-white shadow-lg transition-all flex items-center gap-2 group"
+              className="mt-4 bg-white/80 hover:bg-white px-8 py-4 rounded-full font-bold text-gray-700 shadow-lg transition-all flex items-center gap-2 group"
             >
-              I'm ready to see it now <Heart className="w-4 h-4 text-white group-hover:scale-125 transition-transform" />
+              I'm ready to see it now <Heart className="w-4 h-4 text-red-400 group-hover:scale-125 transition-transform" />
             </button>
           </div>
         </div>
@@ -1315,7 +1273,7 @@ export default function App() {
                     {["Cram more", "Nap", "Cuddle with a cat"].map((opt) => (
                       <button
                         key={opt}
-                        onClick={() => handleQuizStep(opt === "Cuddle with a cat", 2, "A tired cat is a sad cat... try again! 😿")}
+                        onClick={() => handleQuizStep(opt === "Cuddle with a cat", 2, "A tired cat is a sad cat... try again! ðŸ˜¿")}
                         className="p-4 rounded-xl border-2 border-gray-100 hover:border-[#ffb38e] hover:bg-[#ffb38e]/10 transition-all font-medium text-left"
                       >
                         {opt}
@@ -1333,7 +1291,7 @@ export default function App() {
                     {["Library until midnight", "Science documentary", "Reading with a cat on my lap"].map((opt) => (
                       <button
                         key={opt}
-                        onClick={() => handleQuizStep(opt === "Reading with a cat on my lap", 3, "Too much study, not enough purr! 📚")}
+                        onClick={() => handleQuizStep(opt === "Reading with a cat on my lap", 3, "Too much study, not enough purr! ðŸ“š")}
                         className="p-4 rounded-xl border-2 border-gray-100 hover:border-[#a8d8ea] hover:bg-[#a8d8ea]/10 transition-all font-medium text-left"
                       >
                         {opt}
@@ -1387,7 +1345,7 @@ export default function App() {
                   <Sparkles className="text-[#ffb38e] animate-spin-slow" />
                 </div>
                 <p className="text-2xl font-hand leading-relaxed text-gray-600">
-                  We've solved for everything except one variable… 
+                  We've solved for everything except one variableâ€¦ 
                   <br /><br />
                   <span className="text-3xl text-gray-800">Will you be my girlfriend?</span>
                 </p>
@@ -1395,7 +1353,7 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   <button
                     onClick={handleYes}
-                    className="flex-1 neon-button text-white font-bold py-4 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center gap-2"
+                    className="flex-1 bg-[#ffb38e] hover:bg-[#ffa07a] text-white font-bold py-4 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center gap-2"
                   >
                     Yes (Meow!) <Heart className="fill-current" />
                   </button>
@@ -1410,9 +1368,9 @@ export default function App() {
                   ) : (
                     <button
                       onClick={handleYes}
-                      className="flex-1 neon-button text-white font-bold py-4 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all animate-bounce"
+                      className="flex-1 bg-[#ffd1dc] hover:bg-[#ffb6c1] text-gray-700 font-bold py-4 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all animate-bounce"
                     >
-                      Actually, yes ❤️
+                      Actually, yes â¤ï¸
                     </button>
                   )}
                 </div>
@@ -1443,18 +1401,18 @@ export default function App() {
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   className="absolute -inset-8 border-4 border-dashed border-[#ffb38e] rounded-full opacity-30"
                 />
-                <div className="text-9xl">😻</div>
+                <div className="text-9xl">ðŸ˜»</div>
               </div>
               
               <div className="space-y-4">
                 <h2 className="text-4xl font-hand font-bold text-[#ffb38e]">Equation Solved!</h2>
                 <div className="bg-white/80 p-6 rounded-2xl border-2 border-[#a8d8ea] shadow-lg inline-block">
                   <p className="text-3xl font-mono font-bold text-gray-700">
-                    Happiness = Us + 🐱
+                    Happiness = Us + ðŸ±
                   </p>
                 </div>
                 <p className="text-xl font-hand text-gray-600">
-                  (You + Me) × Cats = ∞
+                  (You + Me) Ã— Cats = âˆž
                 </p>
               </div>
 
@@ -1466,7 +1424,7 @@ export default function App() {
                     transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
                     className="text-4xl"
                   >
-                    {i === 1 ? "💝" : i === 2 ? "📚" : "🐾"}
+                    {i === 1 ? "ðŸ’" : i === 2 ? "ðŸ“š" : "ðŸ¾"}
                   </motion.div>
                 ))}
               </div>
@@ -1489,3 +1447,4 @@ export default function App() {
     </div>
   );
 }
+
