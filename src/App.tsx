@@ -471,37 +471,26 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
 };
 
 const CatFiRadio = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  
   return (
     <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4">
-      <h3 className="font-rounded font-bold text-gray-700">Cat-Fi Radio</h3>
-      <div className="relative aspect-video bg-indigo-900 rounded-2xl overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 opacity-30 bg-[url('https://picsum.photos/seed/study/400/225')] bg-cover" />
-        <motion.div
-          animate={{ y: [0, -2, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="relative text-6xl"
-        >
-          ✍️🐱
-        </motion.div>
-        <div className="absolute bottom-2 right-2 flex gap-1">
-          {[1, 2, 3].map(i => (
-            <motion.div
-              key={i}
-              animate={{ height: [4, 12, 4] }}
-              transition={{ duration: 0.5, repeat: Infinity, delay: i * 0.1 }}
-              className="w-1 bg-white"
-            />
-          ))}
-        </div>
+      <h3 className="font-rounded font-bold text-gray-700 flex items-center gap-2">
+        🎵 Study Vibes for Molka
+      </h3>
+      <div className="relative rounded-2xl overflow-hidden">
+        <iframe 
+          style={{ borderRadius: '12px' }}
+          src="https://open.spotify.com/embed/playlist/0FdfpgNWpXlFRb8vkvWj1I?utm_source=generator&theme=0" 
+          width="100%" 
+          height="352" 
+          frameBorder="0" 
+          allowFullScreen={false}
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy"
+        />
       </div>
-      <button
-        onClick={() => { setIsPlaying(!isPlaying); playTone('piano'); }}
-        className="w-full py-2 rounded-full bg-white/80 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all"
-      >
-        {isPlaying ? "Pause Beats" : "Play Lo-Fi Beats"}
-      </button>
+      <p className="text-[10px] font-rounded text-gray-400 text-center">
+        Curated just for you 💜🐱
+      </p>
     </div>
   );
 };
