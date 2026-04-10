@@ -1441,14 +1441,14 @@ export default function App() {
               <h2 className="text-4xl md:text-5xl font-hand font-bold gradient-text">
                 Our Story Together
               </h2>
-              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-[#ffb38e]/30 shadow-xl inline-block">
-                <p className="text-2xl font-hand text-gray-700">
-                  Since April 9th, 2026
-                </p>
-                <p className="text-sm font-rounded text-gray-500 mt-2">
-                  The day everything changed 💖
-                </p>
-              </div>
+              
+              {/* Back Button */}
+              <button
+                onClick={() => setView('STUDY_BREAK')}
+                className="neon-button px-6 py-3 rounded-full font-bold text-white shadow-lg transition-all flex items-center gap-2 mx-auto"
+              >
+                ← Back to Study Break
+              </button>
             </div>
 
             {/* Photo Album Grid */}
@@ -1458,14 +1458,11 @@ export default function App() {
                 initial={{ rotate: -2, y: 20 }}
                 animate={{ rotate: -2, y: 0 }}
                 whileHover={{ rotate: 0, scale: 1.05 }}
-                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
               >
-                <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
                   <div className="absolute inset-0 flex items-center justify-center text-6xl">
                     💝
-                  </div>
-                  <div className="absolute bottom-4 right-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-gray-600">
-                    04/09/2026
                   </div>
                 </div>
                 <p className="text-center font-hand text-xl text-gray-700">
@@ -1481,9 +1478,9 @@ export default function App() {
                 initial={{ rotate: 2, y: 20 }}
                 animate={{ rotate: 2, y: 0 }}
                 whileHover={{ rotate: 0, scale: 1.05 }}
-                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
               >
-                <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
                   <div className="absolute inset-0 flex items-center justify-center text-6xl">
                     🌟
                   </div>
@@ -1501,9 +1498,9 @@ export default function App() {
                 initial={{ rotate: -1, y: 20 }}
                 animate={{ rotate: -1, y: 0 }}
                 whileHover={{ rotate: 0, scale: 1.05 }}
-                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
               >
-                <div className="aspect-square bg-gradient-to-br from-yellow-100 to-orange-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                <div className="aspect-square bg-gradient-to-br from-yellow-100 to-orange-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
                   <div className="absolute inset-0 flex items-center justify-center text-6xl">
                     ✨
                   </div>
@@ -1521,9 +1518,9 @@ export default function App() {
                 initial={{ rotate: 1, y: 20 }}
                 animate={{ rotate: 1, y: 0 }}
                 whileHover={{ rotate: 0, scale: 1.05 }}
-                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
               >
-                <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
                   <div className="absolute inset-0 flex items-center justify-center text-6xl">
                     🚀
                   </div>
@@ -1536,35 +1533,6 @@ export default function App() {
                 </p>
               </motion.div>
             </div>
-
-            {/* Sweet Message */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border-2 border-[#ffd1dc]/30 shadow-xl text-center space-y-4"
-            >
-              <div className="flex justify-center gap-2">
-                {['🐱', '💖', '📚', '✨'].map((emoji, i) => (
-                  <motion.span
-                    key={i}
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-                    className="text-3xl"
-                  >
-                    {emoji}
-                  </motion.span>
-                ))}
-              </div>
-              <p className="text-xl font-hand text-gray-700 leading-relaxed">
-                "Every photo we'll add here will be a reminder of how lucky I am to have you, Molka. 
-                <br />
-                This is just the beginning of our story. 💜"
-              </p>
-              <p className="text-sm font-rounded text-gray-500 italic">
-                (Photos coming soon as we make more memories together!)
-              </p>
-            </motion.div>
 
             {/* Floating Hearts */}
             <div className="flex justify-center gap-4">
