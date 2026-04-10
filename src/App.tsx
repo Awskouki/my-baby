@@ -1477,7 +1477,7 @@ export default function App() {
                   </div>
                 </div>
                 <p className="text-center font-hand text-xl text-gray-700">
-                  The Day We Became Us
+                  Midnight Club Date
                 </p>
               </motion.div>
 
@@ -1503,7 +1503,7 @@ export default function App() {
                   </div>
                 </div>
                 <p className="text-center font-hand text-xl text-gray-700">
-                  Our First Date
+                  Midnight Club Date
                 </p>
               </motion.div>
             </div>
