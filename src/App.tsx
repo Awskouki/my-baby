@@ -1477,7 +1477,7 @@ export default function App() {
                   </div>
                 </div>
                 <p className="text-center font-hand text-xl text-gray-700">
-                  The Day We Became "Us"
+                  The Day We Became Us
                 </p>
               </motion.div>
 
