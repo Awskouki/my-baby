@@ -1584,40 +1584,6 @@ export default function App() {
               ))}
             </div>
           </motion.div>
-                  >
-                    Yes (Meow!) <Heart className="fill-current" />
-                  </button>
-                  
-                  {!actuallyYes ? (
-                    <button
-                      onClick={handleNotYet}
-                      className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-500 font-bold py-4 px-6 rounded-full shadow-md transform hover:scale-95 transition-all"
-                    >
-                      Not yet (I have to study)
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleYes}
-                      className="flex-1 neon-button text-white font-bold py-4 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all animate-bounce"
-                    >
-                      Actually, yes ❤️
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {showWaitMessage && (
-                <motion.div
-                  initial={{ x: -100, opacity: 0 }}
-                  animate={{ x: 1000, opacity: 1 }}
-                  transition={{ duration: 5 }}
-                  className="absolute bottom-10 left-0 z-20 flex items-center gap-2 bg-white p-2 rounded-lg shadow-lg border border-gray-200"
-                >
-                  <CatIcon className="w-6 h-6" />
-                  <span className="text-sm font-hand font-bold">I'll wait... but bring coffee next time.</span>
-                </motion.div>
-              )}
-            </motion.div>
         </AnimatePresence>
       </main>
 
