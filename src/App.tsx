@@ -1413,120 +1413,177 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen font-sans text-gray-800 p-4 md:p-8 flex flex-col items-center relative overflow-hidden">
-      <Doodles />
-      <Bookshelf />
-      <CoffeeMug />
+    <div className="min-h-screen bg-study-break p-6 md:p-12 font-rounded overflow-x-hidden">
+      <FloatingParticles />
+      <PawCursorTrail />
+      <ClickSparkles />
+      <Doodles opacity={0.4} />
       <CatCorner />
       <WalkingCat />
 
-      <motion.div 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="z-10 w-full"
-      >
-        <Chalkboard />
-      </motion.div>
-
-      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-xl z-10 mt-12">
+      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto z-10 mt-12">
         <AnimatePresence mode="wait">
-          {!isFinalAsk ? (
-            <motion.div
-              key={step}
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -20, opacity: 0 }}
-              className="w-full bg-white/80 backdrop-blur-sm p-8 rounded-2xl border-2 border-[#ffb38e]/30 shadow-xl"
-            >
-              {step === 1 && (
-                <div className="space-y-6">
-                  <h2 className="text-xl font-bold font-mono text-center">Step 1: The Efficiency Test</h2>
-                  <p className="text-center font-hand text-2xl">What's the best study break?</p>
-                  <div className="grid gap-3">
-                    {["Cram more", "Nap", "Cuddle with a cat"].map((opt) => (
-                      <button
-                        key={opt}
-                        onClick={() => handleQuizStep(opt === "Cuddle with a cat", 2, "A tired cat is a sad cat... try again! 😿")}
-                        className="p-4 rounded-xl border-2 border-gray-100 hover:border-[#ffb38e] hover:bg-[#ffb38e]/10 transition-all font-medium text-left"
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div className="space-y-6">
-                  <h2 className="text-xl font-bold font-mono text-center">Step 2: Environmental Analysis</h2>
-                  <p className="text-center font-hand text-2xl">Pick your ideal night in:</p>
-                  <div className="grid gap-3">
-                    {["Library until midnight", "Science documentary", "Reading with a cat on my lap"].map((opt) => (
-                      <button
-                        key={opt}
-                        onClick={() => handleQuizStep(opt === "Reading with a cat on my lap", 3, "Too much study, not enough purr! 📚")}
-                        className="p-4 rounded-xl border-2 border-gray-100 hover:border-[#a8d8ea] hover:bg-[#a8d8ea]/10 transition-all font-medium text-left"
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {step === 3 && (
-                <div className="space-y-6">
-                  <h2 className="text-xl font-bold font-mono text-center">Step 3: Solving for X</h2>
-                  <p className="text-center font-hand text-2xl">My grades would improve if I had ___ by my side.</p>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={studyBuddy}
-                      onChange={(e) => handleStudyBuddyChange(e.target.value)}
-                      placeholder="Type your answer..."
-                      className="w-full p-4 rounded-xl border-2 border-[#ffd1dc] focus:outline-none focus:ring-2 focus:ring-[#ffd1dc] font-mono text-center"
-                    />
-                    <div className="mt-4 text-center text-sm text-gray-400 font-mono animate-pulse">
-                      Hint: It's not "a cat" (though they help)
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {feedback && (
-                <motion.p 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="mt-4 text-center text-red-500 font-bold"
-                >
-                  {feedback}
-                </motion.p>
-              )}
-            </motion.div>
-          ) : !isAccepted ? (
-            <motion.div
-              key="final-ask"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="w-full bg-[#fffef0] p-10 rounded-sm border shadow-2xl relative rotate-1"
-              style={{ backgroundImage: 'repeating-linear-gradient(#fffef0, #fffef0 31px, #e5e5e5 31px, #e5e5e5 32px)' }}
-            >
-              <div className="absolute top-0 left-8 bottom-0 w-[2px] bg-red-200" />
-              <div className="relative z-10 pl-12 space-y-8">
-                <div className="flex justify-between items-start">
-                  <h2 className="text-3xl font-hand font-bold text-gray-700">Final Equation</h2>
-                  <Sparkles className="text-[#ffb38e] animate-spin-slow" />
-                </div>
-                <p className="text-2xl font-hand leading-relaxed text-gray-600">
-                  We've solved for everything except one variable… 
-                  <br /><br />
-                  <span className="text-3xl text-gray-800">Will you be my girlfriend?</span>
+          <motion.div
+            key="memory-album"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="w-full space-y-8"
+          >
+            {/* Header */}
+            <div className="text-center space-y-4">
+              <motion.div
+                animate={{ rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="text-7xl"
+              >
+                💕
+              </motion.div>
+              <h2 className="text-4xl md:text-5xl font-hand font-bold gradient-text">
+                Our Story Together
+              </h2>
+              <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-[#ffb38e]/30 shadow-xl inline-block">
+                <p className="text-2xl font-hand text-gray-700">
+                  Since April 9th, 2026
                 </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <button
-                    onClick={handleYes}
-                    className="flex-1 neon-button text-white font-bold py-4 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all flex items-center justify-center gap-2"
+                <p className="text-sm font-rounded text-gray-500 mt-2">
+                  The day everything changed 💖
+                </p>
+              </div>
+            </div>
+
+            {/* Photo Album Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Polaroid 1 - Official Date */}
+              <motion.div
+                initial={{ rotate: -2, y: 20 }}
+                animate={{ rotate: -2, y: 0 }}
+                whileHover={{ rotate: 0, scale: 1.05 }}
+                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+              >
+                <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                    💝
+                  </div>
+                  <div className="absolute bottom-4 right-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-gray-600">
+                    04/09/2026
+                  </div>
+                </div>
+                <p className="text-center font-hand text-xl text-gray-700">
+                  The Day We Became "Us"
+                </p>
+                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
+                  Coming soon: Our first photo together 📸
+                </p>
+              </motion.div>
+
+              {/* Polaroid 2 - First Date */}
+              <motion.div
+                initial={{ rotate: 2, y: 20 }}
+                animate={{ rotate: 2, y: 0 }}
+                whileHover={{ rotate: 0, scale: 1.05 }}
+                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+              >
+                <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                    🌟
+                  </div>
+                </div>
+                <p className="text-center font-hand text-xl text-gray-700">
+                  Our First Date
+                </p>
+                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
+                  Memory loading... 💫
+                </p>
+              </motion.div>
+
+              {/* Polaroid 3 - Favorite Memory */}
+              <motion.div
+                initial={{ rotate: -1, y: 20 }}
+                animate={{ rotate: -1, y: 0 }}
+                whileHover={{ rotate: 0, scale: 1.05 }}
+                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+              >
+                <div className="aspect-square bg-gradient-to-br from-yellow-100 to-orange-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                    ✨
+                  </div>
+                </div>
+                <p className="text-center font-hand text-xl text-gray-700">
+                  Our Favorite Moment
+                </p>
+                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
+                  To be captured... 📷
+                </p>
+              </motion.div>
+
+              {/* Polaroid 4 - Future Adventures */}
+              <motion.div
+                initial={{ rotate: 1, y: 20 }}
+                animate={{ rotate: 1, y: 0 }}
+                whileHover={{ rotate: 0, scale: 1.05 }}
+                className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+              >
+                <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                    🚀
+                  </div>
+                </div>
+                <p className="text-center font-hand text-xl text-gray-700">
+                  Adventures Ahead
+                </p>
+                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
+                  So many memories to make... 🌈
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Sweet Message */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border-2 border-[#ffd1dc]/30 shadow-xl text-center space-y-4"
+            >
+              <div className="flex justify-center gap-2">
+                {['🐱', '💖', '📚', '✨'].map((emoji, i) => (
+                  <motion.span
+                    key={i}
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                    className="text-3xl"
+                  >
+                    {emoji}
+                  </motion.span>
+                ))}
+              </div>
+              <p className="text-xl font-hand text-gray-700 leading-relaxed">
+                "Every photo we'll add here will be a reminder of how lucky I am to have you, Molka. 
+                <br />
+                This is just the beginning of our story. 💜"
+              </p>
+              <p className="text-sm font-rounded text-gray-500 italic">
+                (Photos coming soon as we make more memories together!)
+              </p>
+            </motion.div>
+
+            {/* Floating Hearts */}
+            <div className="flex justify-center gap-4">
+              {[1, 2, 3, 4, 5].map(i => (
+                <motion.div
+                  key={i}
+                  animate={{ 
+                    y: [0, -20, 0],
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }}
+                  className="text-2xl"
+                >
+                  {i % 2 === 0 ? "💕" : "🐾"}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
                   >
                     Yes (Meow!) <Heart className="fill-current" />
                   </button>
@@ -1561,169 +1618,6 @@ export default function App() {
                 </motion.div>
               )}
             </motion.div>
-          ) : (
-            <motion.div
-              key="memory-album"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="w-full max-w-4xl space-y-8"
-            >
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <motion.div
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="text-7xl"
-                >
-                  💕
-                </motion.div>
-                <h2 className="text-4xl md:text-5xl font-hand font-bold gradient-text">
-                  Our Story Together
-                </h2>
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border-2 border-[#ffb38e]/30 shadow-xl inline-block">
-                  <p className="text-2xl font-hand text-gray-700">
-                    Since April 9th, 2026
-                  </p>
-                  <p className="text-sm font-rounded text-gray-500 mt-2">
-                    The day everything changed 💖
-                  </p>
-                </div>
-              </div>
-
-              {/* Photo Album Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Polaroid 1 - Official Date */}
-                <motion.div
-                  initial={{ rotate: -2, y: 20 }}
-                  animate={{ rotate: -2, y: 0 }}
-                  whileHover={{ rotate: 0, scale: 1.05 }}
-                  className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-                >
-                  <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                      💝
-                    </div>
-                    <div className="absolute bottom-4 right-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-gray-600">
-                      04/09/2026
-                    </div>
-                  </div>
-                  <p className="text-center font-hand text-xl text-gray-700">
-                    The Day We Became "Us"
-                  </p>
-                  <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                    Coming soon: Our first photo together 📸
-                  </p>
-                </motion.div>
-
-                {/* Polaroid 2 - First Date */}
-                <motion.div
-                  initial={{ rotate: 2, y: 20 }}
-                  animate={{ rotate: 2, y: 0 }}
-                  whileHover={{ rotate: 0, scale: 1.05 }}
-                  className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-                >
-                  <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                      🌟
-                    </div>
-                  </div>
-                  <p className="text-center font-hand text-xl text-gray-700">
-                    Our First Date
-                  </p>
-                  <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                    Memory loading... 💫
-                  </p>
-                </motion.div>
-
-                {/* Polaroid 3 - Favorite Memory */}
-                <motion.div
-                  initial={{ rotate: -1, y: 20 }}
-                  animate={{ rotate: -1, y: 0 }}
-                  whileHover={{ rotate: 0, scale: 1.05 }}
-                  className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-                >
-                  <div className="aspect-square bg-gradient-to-br from-yellow-100 to-orange-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                      ✨
-                    </div>
-                  </div>
-                  <p className="text-center font-hand text-xl text-gray-700">
-                    Our Favorite Moment
-                  </p>
-                  <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                    To be captured... 📷
-                  </p>
-                </motion.div>
-
-                {/* Polaroid 4 - Future Adventures */}
-                <motion.div
-                  initial={{ rotate: 1, y: 20 }}
-                  animate={{ rotate: 1, y: 0 }}
-                  whileHover={{ rotate: 0, scale: 1.05 }}
-                  className="bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-                >
-                  <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-100 rounded flex items-center justify-center mb-3 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                      🚀
-                    </div>
-                  </div>
-                  <p className="text-center font-hand text-xl text-gray-700">
-                    Adventures Ahead
-                  </p>
-                  <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                    So many memories to make... 🌈
-                  </p>
-                </motion.div>
-              </div>
-
-              {/* Sweet Message */}
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl border-2 border-[#ffd1dc]/30 shadow-xl text-center space-y-4"
-              >
-                <div className="flex justify-center gap-2">
-                  {['🐱', '💖', '📚', '✨'].map((emoji, i) => (
-                    <motion.span
-                      key={i}
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-                      className="text-3xl"
-                    >
-                      {emoji}
-                    </motion.span>
-                  ))}
-                </div>
-                <p className="text-xl font-hand text-gray-700 leading-relaxed">
-                  "Every photo we'll add here will be a reminder of how lucky I am to have you, Molka. 
-                  <br />
-                  This is just the beginning of our story. 💜"
-                </p>
-                <p className="text-sm font-rounded text-gray-500 italic">
-                  (Photos coming soon as we make more memories together!)
-                </p>
-              </motion.div>
-
-              {/* Floating Hearts */}
-              <div className="flex justify-center gap-4">
-                {[1, 2, 3, 4, 5].map(i => (
-                  <motion.div
-                    key={i}
-                    animate={{ 
-                      y: [0, -20, 0],
-                      rotate: [0, 10, -10, 0],
-                      scale: [1, 1.2, 1]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }}
-                    className="text-2xl"
-                  >
-                    {i % 2 === 0 ? "💕" : "🐾"}
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
         </AnimatePresence>
       </main>
 
