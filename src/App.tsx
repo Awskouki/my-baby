@@ -116,6 +116,48 @@ const playSadSound = () => {
   osc.stop(ctx.currentTime + 0.5);
 };
 
+const playTimerAlarm = () => {
+  const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  
+  // Play 3 beeps
+  for (let i = 0; i < 3; i++) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, ctx.currentTime + i * 0.4);
+    
+    gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.4);
+    gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + i * 0.4 + 0.05);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.4 + 0.3);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start(ctx.currentTime + i * 0.4);
+    osc.stop(ctx.currentTime + i * 0.4 + 0.3);
+  }
+  
+  // Final longer beep
+  setTimeout(() => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(1000, ctx.currentTime);
+    
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + 0.1);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.8);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start();
+    osc.stop(ctx.currentTime + 0.8);
+  }, 1200);
+};
+
 // --- Study Break Audio ---
 
 let activeAudio: { stop: () => void } | null = null;
@@ -302,7 +344,7 @@ const CatModoro = ({ onComplete, isActive, setIsActive }: { onComplete: () => vo
     if (isActive && timeLeft > 0) {
       interval = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
     } else if (timeLeft === 0) {
-      playMeow();
+      playTimerAlarm();
       setIsActive(false);
       if (mode === 'WORK') {
         onComplete();
@@ -1461,10 +1503,10 @@ export default function App() {
                   >
                     💕
                   </motion.div>
-                  <h2 className="text-3xl md:text-4xl font-hand font-bold text-white drop-shadow-lg">
+                  <h2 className="text-3xl md:text-4xl font-hand font-bold text-amber-100 album-title">
                     Our Story Together
                   </h2>
-                  <p className="text-sm font-rounded text-white/80 mt-2">Molka & Me</p>
+                  <p className="text-sm font-rounded text-amber-200/70 mt-2">Molka & Me</p>
                 </div>
               </div>
 
