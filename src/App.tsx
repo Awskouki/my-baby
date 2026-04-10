@@ -1413,15 +1413,22 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-study-break p-6 md:p-12 font-rounded overflow-x-hidden">
-      <FloatingParticles />
-      <PawCursorTrail />
-      <ClickSparkles />
-      <Doodles opacity={0.4} />
-      <CatCorner />
-      <WalkingCat />
+    <div className="min-h-screen album-scene p-6 md:p-12 font-rounded overflow-x-hidden">
+      {/* Cozy room elements */}
+      <div className="album-room-overlay"></div>
+      
+      {/* Soft lamp light */}
+      <div className="lamp-glow"></div>
 
-      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto z-10 mt-12 mb-12">
+      {/* Coffee cup on the table */}
+      <div className="coffee-cup"></div>
+      <div className="coffee-steam">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto z-10 mt-12 mb-12 relative">
         <AnimatePresence mode="wait">
           <motion.div
             key="memory-album"
