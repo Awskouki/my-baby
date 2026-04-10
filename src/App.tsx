@@ -1464,7 +1464,7 @@ export default function App() {
               >
                 <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
                   <img 
-                    src="/my-baby/photo1.jpg" 
+                    src="/my-baby/photo1.jpeg" 
                     alt="Our Memory" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -1490,7 +1490,7 @@ export default function App() {
               >
                 <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
                   <img 
-                    src="/my-baby/photo2.jpg" 
+                    src="/my-baby/photo2.jpeg" 
                     alt="Our Memory" 
                     className="w-full h-full object-cover"
                     onError={(e) => {
