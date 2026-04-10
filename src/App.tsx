@@ -1260,7 +1260,33 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
   };
 
   return (
-    <div className="min-h-screen bg-study-break p-6 md:p-12 font-rounded overflow-x-hidden">
+    <motion.div 
+      key="study-break"
+      initial={{ 
+        rotateY: 90,
+        opacity: 0,
+        scale: 0.8,
+        x: 100
+      }}
+      animate={{ 
+        rotateY: 0,
+        opacity: 1,
+        scale: 1,
+        x: 0
+      }}
+      exit={{ 
+        rotateY: -90,
+        opacity: 0,
+        scale: 0.8,
+        x: -100
+      }}
+      transition={{
+        duration: 0.8,
+        ease: [0.43, 0.13, 0.23, 0.96]
+      }}
+      style={{ transformStyle: 'preserve-3d' }}
+      className="min-h-screen bg-study-break p-6 md:p-12 font-rounded overflow-x-hidden"
+    >
       <FloatingParticles />
       <PawCursorTrail />
       <ClickSparkles />
@@ -1345,7 +1371,7 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
       <footer className="max-w-4xl mx-auto mt-12 text-center text-xs text-gray-500 opacity-60 pb-8">
         Made just for Molka. No exams were harmed. Just stress. You've got this.
       </footer>
-    </div>
+    </motion.div>
   );
 };
 
@@ -1425,8 +1451,29 @@ export default function App() {
         <AnimatePresence mode="wait">
           <motion.div
             key="memory-album"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ 
+              rotateY: -90,
+              opacity: 0,
+              scale: 0.8,
+              x: -100
+            }}
+            animate={{ 
+              rotateY: 0,
+              opacity: 1,
+              scale: 1,
+              x: 0
+            }}
+            exit={{ 
+              rotateY: 90,
+              opacity: 0,
+              scale: 0.8,
+              x: 100
+            }}
+            transition={{
+              duration: 0.8,
+              ease: [0.43, 0.13, 0.23, 0.96]
+            }}
+            style={{ transformStyle: 'preserve-3d' }}
             className="w-full space-y-8"
           >
             {/* Header */}
