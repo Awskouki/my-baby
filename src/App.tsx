@@ -1454,8 +1454,8 @@ export default function App() {
             </div>
 
             {/* Photo Album Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Polaroid 1 - Official Date */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              {/* Polaroid 1 */}
               <motion.div
                 initial={{ rotate: -2, y: 20 }}
                 animate={{ rotate: -2, y: 0 }}
@@ -1463,19 +1463,25 @@ export default function App() {
                 className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
               >
                 <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                  <img 
+                    src="/my-baby/photo1.jpg" 
+                    alt="Our Memory" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling!.classList.remove('hidden');
+                    }}
+                  />
+                  <div className="hidden absolute inset-0 flex items-center justify-center text-6xl">
                     💝
                   </div>
                 </div>
                 <p className="text-center font-hand text-xl text-gray-700">
                   The Day We Became "Us"
                 </p>
-                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                  Coming soon: Our first photo together 📸
-                </p>
               </motion.div>
 
-              {/* Polaroid 2 - First Date */}
+              {/* Polaroid 2 */}
               <motion.div
                 initial={{ rotate: 2, y: 20 }}
                 animate={{ rotate: 2, y: 0 }}
@@ -1483,55 +1489,21 @@ export default function App() {
                 className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
               >
                 <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                  <img 
+                    src="/my-baby/photo2.jpg" 
+                    alt="Our Memory" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.nextElementSibling!.classList.remove('hidden');
+                    }}
+                  />
+                  <div className="hidden absolute inset-0 flex items-center justify-center text-6xl">
                     🌟
                   </div>
                 </div>
                 <p className="text-center font-hand text-xl text-gray-700">
                   Our First Date
-                </p>
-                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                  Memory loading... 💫
-                </p>
-              </motion.div>
-
-              {/* Polaroid 3 - Favorite Memory */}
-              <motion.div
-                initial={{ rotate: -1, y: 20 }}
-                animate={{ rotate: -1, y: 0 }}
-                whileHover={{ rotate: 0, scale: 1.05 }}
-                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-              >
-                <div className="aspect-square bg-gradient-to-br from-yellow-100 to-orange-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                    ✨
-                  </div>
-                </div>
-                <p className="text-center font-hand text-xl text-gray-700">
-                  Our Favorite Moment
-                </p>
-                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                  To be captured... 📷
-                </p>
-              </motion.div>
-
-              {/* Polaroid 4 - Future Adventures */}
-              <motion.div
-                initial={{ rotate: 1, y: 20 }}
-                animate={{ rotate: 1, y: 0 }}
-                whileHover={{ rotate: 0, scale: 1.05 }}
-                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-              >
-                <div className="aspect-square bg-gradient-to-br from-green-100 to-emerald-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                    🚀
-                  </div>
-                </div>
-                <p className="text-center font-hand text-xl text-gray-700">
-                  Adventures Ahead
-                </p>
-                <p className="text-center text-xs text-gray-400 mt-1 font-rounded">
-                  So many memories to make... 🌈
                 </p>
               </motion.div>
             </div>
