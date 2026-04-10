@@ -1421,7 +1421,7 @@ export default function App() {
       <CatCorner />
       <WalkingCat />
 
-      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto z-10 mt-12">
+      <main className="flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto z-10 mt-12 mb-12">
         <AnimatePresence mode="wait">
           <motion.div
             key="memory-album"
@@ -1431,20 +1431,8 @@ export default function App() {
             transition={{ duration: 0.3 }}
             className="w-full space-y-8"
           >
-            {/* Header */}
-            <div className="text-center space-y-4">
-              <motion.div
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="text-7xl"
-              >
-                💕
-              </motion.div>
-              <h2 className="text-4xl md:text-5xl font-hand font-bold gradient-text">
-                Our Story Together
-              </h2>
-              
-              {/* Back Button */}
+            {/* Back Button */}
+            <div className="text-center">
               <button
                 onClick={() => setView('STUDY_BREAK')}
                 className="neon-button px-6 py-3 rounded-full font-bold text-white shadow-lg transition-all flex items-center gap-2 mx-auto"
@@ -1453,63 +1441,88 @@ export default function App() {
               </button>
             </div>
 
-            {/* Photo Album Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-              {/* Polaroid 1 */}
-              <motion.div
-                initial={{ rotate: -2, y: 20 }}
-                animate={{ rotate: -2, y: 0 }}
-                whileHover={{ rotate: 0, scale: 1.05 }}
-                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-              >
-                <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
-                  <img 
-                    src="/my-baby/photo1.jpeg" 
-                    alt="Our Memory" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling!.classList.remove('hidden');
-                    }}
-                  />
-                  <div className="hidden absolute inset-0 flex items-center justify-center text-6xl">
-                    💝
-                  </div>
+            {/* Physical Album Book */}
+            <div className="album-book max-w-4xl mx-auto">
+              {/* Album Cover */}
+              <div className="album-cover">
+                <div className="album-spine"></div>
+                <div className="album-cover-front">
+                  <motion.div
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="text-6xl mb-4"
+                  >
+                    💕
+                  </motion.div>
+                  <h2 className="text-3xl md:text-4xl font-hand font-bold text-white drop-shadow-lg">
+                    Our Story Together
+                  </h2>
+                  <p className="text-sm font-rounded text-white/80 mt-2">Molka & Me</p>
                 </div>
-                <p className="text-center font-hand text-xl text-gray-700">
-                  Midnight Club Date
-                </p>
-              </motion.div>
+              </div>
 
-              {/* Polaroid 2 */}
-              <motion.div
-                initial={{ rotate: 2, y: 20 }}
-                animate={{ rotate: 2, y: 0 }}
-                whileHover={{ rotate: 0, scale: 1.05 }}
-                className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
-              >
-                <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
-                  <img 
-                    src="/my-baby/photo2.jpeg" 
-                    alt="Our Memory" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.nextElementSibling!.classList.remove('hidden');
-                    }}
-                  />
-                  <div className="hidden absolute inset-0 flex items-center justify-center text-6xl">
-                    🌟
-                  </div>
+              {/* Album Pages */}
+              <div className="album-pages">
+                {/* Left Page */}
+                <div className="album-page album-page-left">
+                  <motion.div
+                    initial={{ rotate: -2, y: 20 }}
+                    animate={{ rotate: -2, y: 0 }}
+                    whileHover={{ rotate: 0, scale: 1.05 }}
+                    className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+                  >
+                    <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
+                      <img 
+                        src="/my-baby/photo1.jpeg" 
+                        alt="Our Memory" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling!.classList.remove('hidden');
+                        }}
+                      />
+                      <div className="hidden absolute inset-0 flex items-center justify-center text-6xl">
+                        💝
+                      </div>
+                    </div>
+                    <p className="text-center font-hand text-xl text-gray-700">
+                      Midnight Club Date
+                    </p>
+                  </motion.div>
                 </div>
-                <p className="text-center font-hand text-xl text-gray-700">
-                  Midnight Club Date
-                </p>
-              </motion.div>
+
+                {/* Right Page */}
+                <div className="album-page album-page-right">
+                  <motion.div
+                    initial={{ rotate: 2, y: 20 }}
+                    animate={{ rotate: 2, y: 0 }}
+                    whileHover={{ rotate: 0, scale: 1.05 }}
+                    className="polaroid-card bg-white p-4 rounded-lg shadow-xl cursor-pointer"
+                  >
+                    <div className="aspect-square bg-gradient-to-br from-blue-100 to-cyan-100 rounded flex items-center justify-center mb-3 relative overflow-hidden polaroid-photo">
+                      <img 
+                        src="/my-baby/photo2.jpeg" 
+                        alt="Our Memory" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling!.classList.remove('hidden');
+                        }}
+                      />
+                      <div className="hidden absolute inset-0 flex items-center justify-center text-6xl">
+                        🌟
+                      </div>
+                    </div>
+                    <p className="text-center font-hand text-xl text-gray-700">
+                      Midnight Club Date
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
             </div>
 
             {/* Floating Hearts */}
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4 mt-8">
               {[1, 2, 3, 4, 5].map(i => (
                 <motion.div
                   key={i}
