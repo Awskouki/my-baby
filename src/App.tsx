@@ -610,39 +610,6 @@ const DeskPlantModule = ({ growth }: { growth: number }) => {
   );
 };
 
-const FreedomCountdownModule = () => {
-  const [timeLeft, setTimeLeft] = useState("");
-  // Defaulting to a future date, e.g., end of typical exam season
-  const targetDate = new Date("2026-06-15T00:00:00").getTime();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm text-center space-y-4">
-      <h3 className="font-rounded font-bold text-gray-700 flex items-center justify-center gap-2">
-        <Calendar className="w-4 h-4" /> Freedom Countdown
-      </h3>
-      <div className="text-2xl font-mono font-bold text-[#ffb38e] countdown-glow">
-        {timeLeft}
-      </div>
-      <p className="text-[10px] font-rounded text-gray-400 uppercase tracking-widest">
-        Until exams are over & freedom begins!
-      </p>
-    </div>
-  );
-};
-
 const AffirmationJarModule = () => {
   const [affirmation, setAffirmation] = useState("");
   const [isShaking, setIsShaking] = useState(false);
@@ -1345,7 +1312,6 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
         <MeowstonesModule achievements={achievements} />
         <SnackGeneratorModule />
         <DeskPlantModule growth={plantGrowth} />
-        <FreedomCountdownModule />
         <CatToDoList />
         <AffirmationJarModule />
         <BubblePopModule onPop={() => {
