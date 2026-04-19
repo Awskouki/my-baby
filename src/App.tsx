@@ -979,6 +979,282 @@ const ComplimentModule = ({ onGenerate }: { onGenerate: () => void }) => {
   );
 };
 
+const StudyGamesModule = ({ onComplete }: { onComplete: () => void }) => {
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [gameType, setGameType] = useState<'quiz' | 'flashcard' | 'scramble' | null>(null);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+
+  const subjects = {
+    'Biology': {
+      quiz: [
+        { q: 'What is the powerhouse of the cell?', options: ['Nucleus', 'Mitochondria', 'Ribosome', 'Golgi'], correct: 1 },
+        { q: 'What is DNA short for?', options: ['Deoxyribonucleic Acid', 'Diribonucleic Acid', 'Deoxyribose Acid', 'Deoxyribonuclear Acid'], correct: 0 },
+        { q: 'How many chromosomes do humans have?', options: ['23', '46', '48', '44'], correct: 1 },
+      ],
+      flashcards: [
+        { term: 'Photosynthesis', definition: 'Process plants use to make food from sunlight' },
+        { term: 'Mitosis', definition: 'Cell division that produces two identical cells' },
+        { term: 'Enzyme', definition: 'Protein that speeds up chemical reactions' },
+      ]
+    },
+    'Chemistry': {
+      quiz: [
+        { q: 'What is the chemical symbol for water?', options: ['H2O', 'O2', 'CO2', 'H2O2'], correct: 0 },
+        { q: 'What is the pH of a neutral solution?', options: ['0', '7', '14', '10'], correct: 1 },
+        { q: 'What is the most abundant gas in Earth\'s atmosphere?', options: ['Oxygen', 'Carbon Dioxide', 'Nitrogen', 'Hydrogen'], correct: 2 },
+      ],
+      flashcards: [
+        { term: 'Atom', definition: 'Smallest unit of matter' },
+        { term: 'Molecule', definition: 'Two or more atoms bonded together' },
+        { term: 'Ion', definition: 'Atom with electric charge' },
+      ]
+    },
+    'Math': {
+      quiz: [
+        { q: 'What is 15% of 200?', options: ['20', '30', '40', '50'], correct: 1 },
+        { q: 'What is the value of π (pi) approximately?', options: ['3.14', '2.71', '1.41', '1.73'], correct: 0 },
+        { q: 'What is the square root of 144?', options: ['10', '11', '12', '13'], correct: 2 },
+      ],
+      flashcards: [
+        { term: 'Hypotenuse', definition: 'Longest side of a right triangle' },
+        { term: 'Prime Number', definition: 'Number only divisible by 1 and itself' },
+        { term: 'Fraction', definition: 'Part of a whole number' },
+      ]
+    },
+  };
+
+  const handleSubjectSelect = (subject: string) => {
+    setSelectedSubject(subject);
+    setGameType(null);
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowResult(false);
+  };
+
+  const handleGameSelect = (type: 'quiz' | 'flashcard') => {
+    setGameType(type);
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowResult(false);
+    setSelectedAnswer(null);
+  };
+
+  const handleAnswer = (answerIndex: number) => {
+    if (selectedAnswer !== null) return; // Already answered
+    
+    setSelectedAnswer(answerIndex);
+    const questions = subjects[selectedSubject as keyof typeof subjects].quiz;
+    const isCorrect = answerIndex === questions[currentQuestion].correct;
+    
+    if (isCorrect) {
+      setScore(score + 1);
+      playHappyMelody();
+    } else {
+      playSadSound();
+    }
+
+    setTimeout(() => {
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(null);
+      } else {
+        setShowResult(true);
+        if (score + (isCorrect ? 1 : 0) >= questions.length * 0.7) {
+          onComplete();
+          confetti({ particleCount: 100, spread: 70 });
+        }
+      }
+    }, 1500);
+  };
+
+  const resetGame = () => {
+    setSelectedSubject(null);
+    setGameType(null);
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowResult(false);
+    setSelectedAnswer(null);
+  };
+
+  if (!selectedSubject) {
+    return (
+      <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4">
+        <h3 className="font-rounded font-bold text-gray-700 flex items-center gap-2">
+          🎮 Study Break Games
+        </h3>
+        <p className="text-xs text-gray-500 font-rounded">Pick a subject for a quick brain workout!</p>
+        <div className="grid grid-cols-1 gap-3">
+          {Object.keys(subjects).map(subject => (
+            <button
+              key={subject}
+              onClick={() => handleSubjectSelect(subject)}
+              className="bg-white/80 hover:bg-white p-4 rounded-xl font-rounded font-bold text-gray-700 transition-all hover:scale-105 shadow-sm"
+            >
+              {subject} 📚
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!gameType) {
+    return (
+      <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-rounded font-bold text-gray-700">{selectedSubject}</h3>
+          <button onClick={resetGame} className="text-xs text-gray-400 hover:text-gray-600">← Back</button>
+        </div>
+        <p className="text-xs text-gray-500 font-rounded">Choose your game mode:</p>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            onClick={() => handleGameSelect('quiz')}
+            className="bg-gradient-to-br from-purple-100 to-pink-100 p-4 rounded-xl font-rounded font-bold text-gray-700 transition-all hover:scale-105 shadow-sm"
+          >
+            <div className="text-3xl mb-2">❓</div>
+            Quick Quiz
+          </button>
+          <button
+            onClick={() => handleGameSelect('flashcard')}
+            className="bg-gradient-to-br from-blue-100 to-cyan-100 p-4 rounded-xl font-rounded font-bold text-gray-700 transition-all hover:scale-105 shadow-sm"
+          >
+            <div className="text-3xl mb-2">🃏</div>
+            Flashcards
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (gameType === 'quiz') {
+    const questions = subjects[selectedSubject as keyof typeof subjects].quiz;
+    const currentQ = questions[currentQuestion];
+
+    if (showResult) {
+      const percentage = Math.round((score / questions.length) * 100);
+      return (
+        <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4 text-center">
+          <div className="text-6xl mb-4">{percentage >= 70 ? '🎉' : '💪'}</div>
+          <h3 className="font-rounded font-bold text-gray-700 text-2xl">
+            {percentage >= 70 ? 'Amazing, Molka!' : 'Good try!'}
+          </h3>
+          <p className="text-4xl font-bold text-[#ffb38e]">{score}/{questions.length}</p>
+          <p className="text-sm text-gray-500 font-rounded">
+            {percentage >= 70 ? 'You\'re crushing it! 🐱' : 'Practice makes paw-fect! 🐾'}
+          </p>
+          <button
+            onClick={resetGame}
+            className="neon-button px-6 py-3 rounded-full font-bold text-white shadow-lg transition-all"
+          >
+            Play Again
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-mono bg-white/50 px-3 py-1 rounded-full">
+            Question {currentQuestion + 1}/{questions.length}
+          </span>
+          <span className="text-xs font-mono bg-[#ffb38e]/20 px-3 py-1 rounded-full">
+            Score: {score}
+          </span>
+        </div>
+        
+        <h4 className="font-rounded font-bold text-gray-700 text-lg">{currentQ.q}</h4>
+        
+        <div className="space-y-2">
+          {currentQ.options.map((option, idx) => {
+            let bgColor = 'bg-white/80 hover:bg-white';
+            if (selectedAnswer !== null) {
+              if (idx === currentQ.correct) {
+                bgColor = 'bg-green-200 border-2 border-green-400';
+              } else if (idx === selectedAnswer) {
+                bgColor = 'bg-red-200 border-2 border-red-400';
+              }
+            }
+            
+            return (
+              <button
+                key={idx}
+                onClick={() => handleAnswer(idx)}
+                disabled={selectedAnswer !== null}
+                className={`w-full p-3 rounded-xl font-rounded text-left transition-all ${bgColor} ${selectedAnswer === null ? 'hover:scale-102' : ''}`}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Flashcard mode
+  const flashcards = subjects[selectedSubject as keyof typeof subjects].flashcards;
+  const [flipped, setFlipped] = useState(false);
+  const currentCard = flashcards[currentQuestion];
+
+  return (
+    <div className="bg-white/40 p-6 rounded-3xl border border-white/20 shadow-sm space-y-4">
+      <div className="flex items-center justify-between">
+        <span className="text-xs font-mono bg-white/50 px-3 py-1 rounded-full">
+          Card {currentQuestion + 1}/{flashcards.length}
+        </span>
+        <button onClick={resetGame} className="text-xs text-gray-400 hover:text-gray-600">✕</button>
+      </div>
+
+      <div 
+        onClick={() => setFlipped(!flipped)}
+        className="bg-white p-8 rounded-2xl shadow-lg cursor-pointer min-h-[200px] flex items-center justify-center text-center transition-all hover:scale-105"
+      >
+        <div>
+          <p className="text-xs text-gray-400 mb-2">{flipped ? 'Definition' : 'Term'}</p>
+          <p className="font-rounded font-bold text-xl text-gray-700">
+            {flipped ? currentCard.definition : currentCard.term}
+          </p>
+          <p className="text-xs text-gray-400 mt-4">Tap to flip</p>
+        </div>
+      </div>
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => {
+            if (currentQuestion > 0) {
+              setCurrentQuestion(currentQuestion - 1);
+              setFlipped(false);
+            }
+          }}
+          disabled={currentQuestion === 0}
+          className="flex-1 py-2 rounded-xl bg-white/80 hover:bg-white disabled:opacity-50 font-rounded font-bold text-gray-700"
+        >
+          ← Previous
+        </button>
+        <button
+          onClick={() => {
+            if (currentQuestion < flashcards.length - 1) {
+              setCurrentQuestion(currentQuestion + 1);
+              setFlipped(false);
+            } else {
+              onComplete();
+              confetti({ particleCount: 50, spread: 60 });
+              resetGame();
+            }
+          }}
+          className="flex-1 py-2 rounded-xl bg-[#ffb38e] hover:bg-[#ff9d6e] text-white font-rounded font-bold"
+        >
+          {currentQuestion < flashcards.length - 1 ? 'Next →' : 'Finish! 🎉'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const SoundModule = () => {
   const [active, setActive] = useState<string | null>(null);
 
@@ -1347,6 +1623,10 @@ const StudyBreakCorner = ({ onFinish }: { onFinish: () => void }) => {
         <DeskPlantModule growth={plantGrowth} />
         <FreedomCountdownModule />
         <CatToDoList />
+        <StudyGamesModule onComplete={() => {
+          handleAction();
+          setPlantGrowth(prev => prev + 1);
+        }} />
         <AffirmationJarModule />
         <BubblePopModule onPop={() => {
           handleAction();
