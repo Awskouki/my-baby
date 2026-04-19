@@ -986,6 +986,7 @@ const StudyGamesModule = ({ onComplete }: { onComplete: () => void }) => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [flipped, setFlipped] = useState(false);
 
   const subjects = {
     'Biology': {
@@ -1197,7 +1198,6 @@ const StudyGamesModule = ({ onComplete }: { onComplete: () => void }) => {
 
   // Flashcard mode
   const flashcards = subjects[selectedSubject as keyof typeof subjects].flashcards;
-  const [flipped, setFlipped] = useState(false);
   const currentCard = flashcards[currentQuestion];
 
   return (
