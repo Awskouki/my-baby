@@ -1078,6 +1078,7 @@ const StudyGamesModule = ({ onComplete }: { onComplete: () => void }) => {
     setScore(0);
     setShowResult(false);
     setSelectedAnswer(null);
+    setFlipped(false);
   };
 
   if (!selectedSubject) {
