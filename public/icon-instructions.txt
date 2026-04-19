@@ -1,0 +1,25 @@
+APP ICON INSTRUCTIONS
+=====================
+
+You need to create 2 app icons and place them in the public folder:
+
+1. icon-192.png (192x192 pixels)
+2. icon-512.png (512x512 pixels)
+
+EASY WAY TO CREATE ICONS:
+1. Go to https://favicon.io/favicon-generator/
+2. Use these settings:
+   - Text: 💕 or M (for Molka)
+   - Background: #ffb38e (peachy color)
+   - Font: Rounded
+3. Download and extract
+4. Rename the largest icons to icon-192.png and icon-512.png
+5. Place them in the public folder
+
+OR use any image editor to create square PNG images with:
+- A heart emoji 💕
+- Or "M" letter
+- Or a cat emoji 🐱
+- Background color: #ffb38e
+
+Once you add the icons, the app will be installable on phones!
